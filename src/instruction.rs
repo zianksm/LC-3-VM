@@ -1,7 +1,17 @@
-
 macro_rules! opcode {
     ($name:ident, $code:expr) => {
         pub const $name: u8 = $code;
+    };
+}
+
+#[macro_export]
+macro_rules! instruction {
+    ($($bit:expr),*) => {
+        {
+
+        let instruction: [u8; 4] = [$($bit),*];
+        instruction
+        }
     };
 }
 

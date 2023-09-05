@@ -113,6 +113,7 @@ impl VM {
 
 #[cfg(test)]
 mod tests {
+    use crate::instruction;
     use crate::instruction::{ OP_HLT, OP_LOAD };
 
     use super::*;
@@ -145,8 +146,9 @@ mod tests {
         let mut vm = VM::new();
         let register_index = 1;
 
-        let instruction = vec![OP_LOAD, register_index, 1, 244];
-        vm.program = instruction; // Remember, this is how we represent 500 using two u8s in little endian format
+        let instruction = instruction!(OP_LOAD, register_index, 1, 244); // Remember, this is how we represent 500 using two u8s in little endian format
+
+        vm.program = instruction.to_vec();
 
         vm.run();
 
